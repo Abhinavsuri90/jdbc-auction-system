@@ -64,9 +64,16 @@ public class DBConnector {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            System.out.println("Attempting to connect to database...");
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("✅ Database connection established successfully!");
+            return conn;
+        } catch (ClassNotFoundException e) {
+            System.err.println("❌ MySQL JDBC Driver not found: " + e.getMessage());
+            return null;
+        } catch (SQLException e) {
+            System.err.println("❌ Database connection failed: " + e.getMessage());
+            System.err.println("Please check your database credentials and ensure MySQL server is running.");
             return null;
         }
     }
