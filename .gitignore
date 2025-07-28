@@ -12,6 +12,7 @@
 
 # Package Files
 *.jar
+!lib/mysql-connector-j-*.jar
 *.war
 *.nar
 *.ear
