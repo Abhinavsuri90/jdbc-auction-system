@@ -44,9 +44,42 @@ The project uses MySQL with the following main tables:
      - Username
      - Password
 
+## Quick Start Guide
+
+### For Windows Users:
+```cmd
+javac -cp "lib/mysql-connector-j-9.4.0.jar;." -d . src/**/*.java src/*.java
+java -cp "lib/mysql-connector-j-9.4.0.jar;." Main
+```
+
+### For Mac/Linux Users:
+```bash
+javac -cp "lib/mysql-connector-j-9.4.0.jar:." -d . src/**/*.java src/*.java
+java -cp "lib/mysql-connector-j-9.4.0.jar:." Main
+```
+
+### Step-by-Step Execution:
+1. **Navigate to project directory:**
+   ```bash
+   cd path/to/jdbc-auction-system
+   ```
+
+2. **Compile the project:**
+   ```bash
+   javac -cp "lib/mysql-connector-j-9.4.0.jar:." -d . src/**/*.java src/*.java
+   ```
+
+3. **Run the application:**
+   ```bash
+   java -cp "lib/mysql-connector-j-9.4.0.jar:." Main
+   ```
+
+4. **Follow the prompts to enter your database connection details when the application starts**
+
 ## Project Structure
 
 ```
+jdbc-auction-system/
 ├── src/
 │   ├── Main.java              # Main application entry point
 │   ├── DAO/                   # Data Access Objects
@@ -63,7 +96,9 @@ The project uses MySQL with the following main tables:
 │       └── Wallets.java
 ├── lib/
 │   └── mysql-connector-j-9.4.0.jar  # MySQL JDBC driver
-└── schema.sql                 # Database schema and sample data
+├── schema.sql                 # Database schema and sample data
+├── README.md                  # This file
+└── .gitignore                # Git ignore rules
 ```
 
 ## Queries Implemented
