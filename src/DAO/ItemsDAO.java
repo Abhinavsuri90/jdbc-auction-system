@@ -12,8 +12,18 @@ public class ItemsDAO {
     private static final String query = "INSERT INTO items(itemId, itemName, description, startPrice, reservePrice, sellerId, auctionId, status, listingFee, resHideFee, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public void insert(Items item) {
+        if (item == null) {
+            System.err.println("❌ Cannot insert null item");
+            return;
+        }
+        
         try {
             Connection connection = DBConnector.getConnection();
+            if (connection == null) {
+                System.err.println("❌ Failed to get database connection");
+                return;
+            }
+            
             PreparedStatement ps = connection.prepareStatement(query);
 
             ps.setInt(1, item.getItemId());
@@ -29,9 +39,17 @@ public class ItemsDAO {
             ps.setTimestamp(11, item.getCreatedAt());
             ps.setTimestamp(12, item.getUpdatedAt());
 
-            ps.executeUpdate();
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("✅ Item '" + item.getItemName() + "' inserted successfully!");
+            } else {
+                System.out.println("⚠️ No rows were affected during item insertion");
+            }
+            
+            ps.close();
+            connection.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.err.println("❌ Error inserting item: " + e.getMessage());
         }
     }
 }
